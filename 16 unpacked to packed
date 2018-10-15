@@ -1,0 +1,27 @@
+d segment
+    var db 01h,02h,03h,05h,06h,08h,07h,01h,02h,09h,08h,04h,06h,09h,04h,01h   
+    res dd ?
+    
+d ends
+c segment
+    start:
+        mov ax,d
+        mov ds,ax
+        mov cx,8 
+        mov si,0 
+        mov bp,7
+        
+    pack: 
+        mov ax,0
+        mov al,var[si+1]
+        shl al,4
+        mov ah,var[si]
+        shr ax,4
+        mov byte ptr res[bp],al
+        add si,2
+        dec bp
+        loop pack
+c ends
+end start
+        
+            
