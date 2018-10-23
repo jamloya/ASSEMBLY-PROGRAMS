@@ -1,0 +1,24 @@
+d segment
+         dw 25 dup(?)
+   var1 dw 1235h,4567h,7890h,1230h,56h
+   res dw ?
+d ends 
+c segment
+   start:
+    mov ax,d
+    mov ds,ax  
+    mov ax,var1
+    mov res,ax
+    mov ax,0 
+    mov cx,5
+    mov si,2
+    addarray:
+        mov ax,var1[si]
+        add ax,res
+        mov res,ax
+        add si,2
+        loop addarray:
+    c ends
+end start
+      
+    
