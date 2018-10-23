@@ -1,0 +1,27 @@
+d segment
+    var1 dw 1234h,5640h,1256h,1023h
+    res dw ?
+d ends
+c segment
+    start:
+        mov ax,d
+        mov ds,ax
+        mov cx,3
+        mov ax,var1
+        mov res,ax
+        mov ax,0
+        mov si,2
+        bcdadd:
+            mov al,byte ptr var1[si]
+            add al,byte ptr res
+            daa 
+            mov byte ptr res,al     
+            inc si
+            mov al,byte ptr var1[si]
+            adc al,byte ptr res[1] 
+            daa
+            mov byte ptr res[1],al
+            inc si
+        loop bcdadd:
+        c ends
+end start
