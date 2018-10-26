@@ -1,23 +1,26 @@
 
-d segment    
-          dw dup <?>
+data segment    
+          dw 25 dup(?)
+    var dw 5 dup(?)
+    var_neg dw 5 dup(?)
     var1 dw 1235h,1456h,1789h,1236h,1002h 
-    res dw 5 dup(?)
-d ends
-c segment
+    size dw 5
+data ends
+code segment
     
     start:
-        mov ax,d
+        mov ax,data
         mov ds,ax 
-        mov cx,5
+        mov cx,size
         mov si,0 
         mov ax,0
         
-    cmplt:
+    next:
         mov ax,var1[si]
+        mov var[si],ax
         neg ax
-        mov res[si],ax
+        mov var_neg[si],ax
         add si,2
-        loop cmplt:
-     c ends
+        loop next
+     code ends
 end start
