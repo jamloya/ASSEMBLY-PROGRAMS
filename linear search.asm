@@ -1,12 +1,12 @@
-d segment
+data segment
     var db 1h,6h,9h,5h,3h 
     el db ?
     found db 'element found','$'
     nfound db 'element not found','$'
-d ends
-c segment
+data ends
+code segment
     start:
-        mov ax,d
+        mov ax,data
         mov ds,ax
         mov ax,0
         mov ah,1h
@@ -38,7 +38,7 @@ c segment
         mov dx,offset nfound
         int 21h 
     
-    c ends
+    code ends
 end start
         
      
